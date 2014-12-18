@@ -37,6 +37,7 @@ The following files need to be configured on the Salt master:
 This reactor uses the Salt reactor system. You have to link the reactor system to the corresponding reactor file. Add this to your master config file.
 
 .. code-block:: yaml
+
     reactor:
       - 'salt/netapi/hook/dev/service':
         - /srv/reactor/dev-vm-service.sls
@@ -46,6 +47,7 @@ This reactor uses the Salt reactor system. You have to link the reactor system t
 This reactor makes use of the web hooks system introduced in Salt API 0.8.4. The configuration for Salt API is stored in the salt-api configuration file:
 
 .. code-block:: yaml
+
     rest_cherrypy:
     port: 9999
     host: 0.0.0.0
@@ -65,6 +67,7 @@ Master if it doesn't already exist, and copy this file into it.
 Update your top.sls file to match to the developer vms host group, e.g., by:
 
 .. code-block:: yaml
+
     base:
      'linux-dev-vm-*':
         - common
@@ -80,9 +83,11 @@ Vagrantfile
 This is the configuration file which is used by vagrant tooling to configure/bootstrap a virtual machine image. I have added the following hooks/parts to connect it with salt stack. I have also included an example Vagrantfile in the repository. In a real world example, you would create and provide your own base box. However, for illustrational purposes, I have used the "hashicorp/precise64" box. Therefore, if you have not yet added the this box, you can do this by
 
 .. code-block:: yaml
+
     vagrant box add hashicorp/precise32
 
 .. code-block:: yaml
+
     VAGRANTFILE_API_VERSION = "2"
 
     Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -123,10 +128,12 @@ Basic Usage
 -----------
 Go into the folder which contains your Vagrantfile. Start a new vm by calling:
 .. code-block:: yaml
+
     vagrant up
 
 Destroy a vm by calling:
 .. code-block:: yaml
+
     vagrant destroy
 
 References
