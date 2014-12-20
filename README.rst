@@ -15,22 +15,18 @@ The goals/requirements are fullfilled by the following reactor. Each developer v
 
 Dependencies
 ------------
-.. code-block:: yaml
-
-    - Salt
-    - salt-api (Install salt-api by following this blog post... http://bencane.com/2014/07/17/integrating-saltstack-with-other-services-via-salt-api/ )
-    - vagrant (for vagrant part)
-    - vagrant-triggers plugin (vagrant plugin install vagrant-triggers)
+- Salt
+- salt-api (Install salt-api by following this blog post... http://bencane.com/2014/07/17/integrating-saltstack-with-other-services-via-salt-api/ )
+- vagrant (for vagrant part)
+- vagrant-triggers plugin (vagrant plugin install vagrant-triggers)
 
 Master Configuration
 --------------------
 The following files need to be configured on the Salt master:
 
-.. code-block:: yaml
-
-    - /etc/salt/master
-    - /etc/salt/master.d/salt-api.conf
-    - /srv/reactor/dev-vm-service.sls 
+- ``/etc/salt/master``
+- ``/etc/salt/master.d/salt-api.conf``
+- ``/srv/reactor/dev-vm-service.sls``
 
 /etc/salt/master
 ~~~~~~~~~~~~~~~~
@@ -49,12 +45,12 @@ This reactor makes use of the web hooks system introduced in Salt API 0.8.4. The
 .. code-block:: yaml
 
     rest_cherrypy:
-    port: 9999
-    host: 0.0.0.0
-    ssl_crt: /etc/ssl/private/cert.pem
-    ssl_key: /etc/ssl/private/key.pem
-    webhook_disable_auth: True
-    webhook_url: /hook
+      port: 9999
+      host: 0.0.0.0
+      ssl_crt: /etc/ssl/private/cert.pem
+      ssl_key: /etc/ssl/private/key.pem
+      webhook_disable_auth: True
+      webhook_url: /hook
 
 /srv/reactor/dev-vm-service.sls
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,12 +123,14 @@ This is the configuration file which is used by vagrant tooling to configure/boo
 Basic Usage
 -----------
 Go into the folder which contains your Vagrantfile. Start a new vm by calling:
-.. code-block:: yaml
+
+.. code-block:: bash
 
     vagrant up
 
 Destroy a vm by calling:
-.. code-block:: yaml
+
+.. code-block:: bash
 
     vagrant destroy
 
