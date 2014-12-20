@@ -6,19 +6,19 @@ Autonomous Minion Management via Vagrant Shell Provisioners.
 This is a reactor formula, which allows a local Vagrant installation/bootstrapped VM to notify Salt Master when a new instance of a vagrant (e.g. developer) vm is created with "vagrant up",  so that it may be automatically bootstrapped amd accepted by the Salt Master. "Vagrant destroy" will result in removing the corresponding minion key on the salt-master for that vm. The security model is a compromise between opening up the master completly, e.g., auto-accepting keys purely or by hostname, and having to define all minion keys beforehand (pre-seeding).
 I wanted to achieve the following goals for my salt environment and the managed development environments:
 - beeing able to automatically add/remove developer vms
-- no pre-seeding because I don't know the required number of minions and minion-ids beforehand
+- no preseeding because I don't know the required number of minions and minion-ids beforehand
 - preserve some security/access control to the overall system (don't want to open the salt-master completly)
 - in principal something similar to chef validator key concept
 - limit/restrict the vms to the corresponding part of the top.sls file (restrict access to pillar and states based on hostname)
 
-The goals/requirements are fullfilled by the following reactor. Each developer vm template (Vagrantfile) is considered as a security group. Each group has it's own service key which can be used to accept and delete (with knowledge of hostname) keys of this group. A service key can be only used to accept specific hostname patterns, hence, it is not possible to freely bootstrap nodes by just changing the "minion id" of the developer vm.
+The goals/requirements are fulfilled by the following reactor. Each developer vm template (Vagrantfile) is considered as a security group. Each group has it's own service key which can be used to accept and delete (with knowledge of hostname) keys of this group. A service key can be only used to accept specific hostname patterns, hence, it is not possible to freely bootstrap nodes by just changing the "minion id" of the developer vm.
 
 Dependencies
 ------------
 - Salt
 - salt-api (Install salt-api by following this blog post... http://bencane.com/2014/07/17/integrating-saltstack-with-other-services-via-salt-api/ )
 - vagrant (for vagrant part)
-- vagrant-triggers plugin (vagrant plugin install vagrant-triggers)
+- vagrant-triggers plugin (use ``vagrant plugin install vagrant-triggers`` to install plugin)
 
 Master Configuration
 --------------------
@@ -76,7 +76,7 @@ My vagrant configuration is managed in a project specific git repository. The de
 
 Vagrantfile
 ~~~~~~~~~~~
-This is the configuration file which is used by vagrant tooling to configure/bootstrap a virtual machine image. I have added the following hooks/parts to connect it with salt stack. I have also included an example Vagrantfile in the repository. In a real world example, you would create and provide your own base box. However, for illustrational purposes, I have used the "hashicorp/precise64" box. Therefore, if you have not yet added the this box, you can do this by
+This is the configuration file which is used by vagrant tooling to configure/bootstrap a virtual machine image. I have added the following hooks/parts to connect it with salt stack. I have also included an example Vagrantfile in the repository. In a real world example, you would create and provide your own base box. However, for illustrational purposes, I have used the "hashicorp/precise64" box. Therefore, if you have not yet added the this box, you can do this by issuing the following command
 
 .. code-block:: yaml
 
